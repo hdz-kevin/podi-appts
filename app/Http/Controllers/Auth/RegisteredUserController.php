@@ -29,11 +29,22 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+        $request->validate(
+            [
+                'name' => ['required', 'string', 'min:3', 'max:255'],
+                'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+                'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            ],
+            [
+                'name.required' => 'El nombre es obligatorio.',
+                'name.min' => 'El nombre es muy corto.',
+                'email.required' => 'El email es obligatorio.',
+                'email.unique' => 'El email ya está registrado.',
+                'password.required' => 'La contraseña es obligatoria.',
+                'password.min' => 'La contraseña debe tener al menos :min caracteres.',
+                'password.confirmed' => 'Las contraseñas no coinciden.',
+            ]
+        );
 
         $user = User::create([
             'name' => $request->name,
