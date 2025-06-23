@@ -9,7 +9,4 @@ cuente con doctores registrados. Adicionalmente, cada cita dispondrá de una fec
 que puede ser pendiente, atendida o cancelada, una descripción de los sintomas que será opcional,
 una dirección en caso de que la cita sea a domicilio, y se deberá especificar el paciente que la agendó.
 Si se trata de un nuevo paciente, deberá ser registrado en la aplicación con su nombre, número de
-teléfono y sexo.
-
-Opcionalmente, a los pacientes se les podrá asociar direcciones, esto evitará que el administrador tenga
-que escribir la dirección manualmente si se trata de una cita a domicilio.
+teléfono, sexo y una dirección opcional.
