@@ -10,12 +10,11 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
-        // then: function () {
-        //     Route::middleware('web')
-        //             ->prefix('appointments')
-        //             ->name('appointments.')
-        //             ->group(__DIR__.'/../routes/appointments.php');
-        // }
+        then: function () {
+            Route::get('/patients', fn () => view('patients.index'))
+                    ->middleware('web')
+                    ->name('patients.index');
+        }
     )
     ->withMiddleware(function (Middleware $middleware) {
         //
