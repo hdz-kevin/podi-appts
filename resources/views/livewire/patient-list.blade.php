@@ -9,15 +9,34 @@
   </style>
 @endpush
 
+@php
+  $initialColors = [
+    'bg-blue-100 text-blue-600',
+    'bg-pink-100 text-pink-600',
+    'bg-green-100 text-green-600',
+    'bg-purple-100 text-purple-600',
+    'bg-yellow-100 text-yellow-600',
+    'bg-red-100 text-red-600',
+    'bg-indigo-100 text-indigo-600',
+    'bg-orange-100 text-orange-600',
+    'bg-teal-100 text-teal-600',
+    'bg-lime-100 text-lime-600',
+    'bg-emerald-100 text-emerald-600',
+    'bg-cyan-100 text-cyan-600',
+    'bg-amber-100 text-amber-600',
+    'bg-gray-100 text-gray-600',
+  ];
+@endphp
+
 <div>
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-    @foreach ($patients as $patient)
+    @foreach ($patients as $index => $patient)
       {{-- card --}}
       <div class="bg-white rounded-xl shadow-md border border-gray-200 p-6 flex flex-col items-start space-y-4 hover:shadow-lg
         transition duration-200 ease-in-out">
         <div class="flex items-center space-x-3 mb-2">
-          <div class="flex-shrink-0 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-xl font-bold">
-            JP
+          <div class="{{ $initialColors[$index] }} flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">
+            {{ $patient->initials() }}
           </div>
           <div>
             <h3 class="text-lg font-semibold text-gray-900">

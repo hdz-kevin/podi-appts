@@ -26,4 +26,17 @@ class Patient extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Get the initials of the patient's name.
+     *
+     * @return string
+     */
+    public function initials(): string
+    {
+        $split = explode(" ", $this->name);
+        $initials = substr($split[0], 0, 1) . substr($split[1], 0, 1);
+
+        return $initials;
+    }
 }
