@@ -29,6 +29,24 @@
 @endphp
 
 <div>
+  <div class="flex flex-col md:flex-row items-center justify-between mb-8">
+    <h1 class="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Gestión de Pacientes</h1>
+    <div class="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4 w-full md:w-auto">
+      <div class="relative w-full md:w-80">
+        <input
+        type="text"
+        placeholder="Buscar paciente..."
+        class="w-full px-4 py-2 pl-10 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm transition duration-150 ease-in-out"
+        >
+        <i data-lucide="search" class="lucide lucide-icon absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+      </div>
+      <button class="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105 flex items-center justify-center space-x-2">
+        <i data-lucide="plus-circle" class="lucide lucide-icon"></i>
+        <span>Nuevo Paciente</span>
+      </button>
+    </div>
+  </div>
+
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     @foreach ($patients as $index => $patient)
       {{-- card --}}
