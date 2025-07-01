@@ -29,7 +29,11 @@
 @endphp
 
 <div>
-  <div class="flex flex-col md:flex-row items-center justify-between mb-8">
+  @if ($modal)
+    <livewire:patient-form />
+  @endif
+
+  <div class="flex flex-col md:flex-row items-center justify-between mb-6">
     <h1 class="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Gestión de Pacientes</h1>
     <div class="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-4 w-full md:w-auto">
       <div class="relative w-full md:w-80">
@@ -40,7 +44,7 @@
         >
         <i data-lucide="search" class="lucide lucide-icon absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
       </div>
-      <button class="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition duration-200 ease-in-out transform hover:scale-105 flex items-center justify-center space-x-2">
+      <button wire:click="openModal" class="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition duration-200 ease-in-out transform flex items-center justify-center space-x-2 show-form">
         <i data-lucide="plus-circle" class="lucide lucide-icon"></i>
         <span>Nuevo Paciente</span>
       </button>
@@ -95,5 +99,11 @@
   <script src="https://unpkg.com/lucide@latest"></script>
   <script>
     lucide.createIcons();
+
+    // Show form
+    // document.querySelector('.show-form').addEventListener('click', () => {
+      // @this.set('modal', true);
+      // @this.openModal();
+    // });
   </script>
 @endpush
