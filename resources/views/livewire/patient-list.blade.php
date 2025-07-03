@@ -109,4 +109,5 @@
   @if($showForm)
     <livewire:patient-form />
   @endif
+
 </div>
