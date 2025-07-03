@@ -1,26 +1,21 @@
-@php
-  $initialColors = [
-    'bg-blue-100 text-blue-600',
-    'bg-pink-100 text-pink-600',
-    'bg-green-100 text-green-600',
-    'bg-purple-100 text-purple-600',
-    'bg-yellow-100 text-yellow-600',
-    'bg-red-100 text-red-600',
-    'bg-indigo-100 text-indigo-600',
-    'bg-orange-100 text-orange-600',
-    'bg-teal-100 text-teal-600',
-    'bg-lime-100 text-lime-600',
-    'bg-emerald-100 text-emerald-600',
-    'bg-cyan-100 text-cyan-600',
-    'bg-amber-100 text-amber-600',
-    'bg-gray-100 text-gray-600',
-  ];
-@endphp
-
 <div>
-  @if ($modal)
-    <livewire:patient-form />
-  @endif
+  @php
+    $initialColors = [ 'bg-blue-100 text-blue-600',
+      'bg-pink-100 text-pink-600',
+      'bg-green-100 text-green-600',
+      'bg-purple-100 text-purple-600',
+      'bg-yellow-100 text-yellow-600',
+      'bg-red-100 text-red-600',
+      'bg-indigo-100 text-indigo-600',
+      'bg-orange-100 text-orange-600',
+      'bg-teal-100 text-teal-600',
+      'bg-lime-100 text-lime-600',
+      'bg-emerald-100 text-emerald-600',
+      'bg-cyan-100 text-cyan-600',
+      'bg-amber-100 text-amber-600',
+      'bg-gray-100 text-gray-600',
+    ];
+  @endphp
 
   <div class="flex flex-col md:flex-row items-center justify-between mb-6">
     <h1 class="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Gestión de Pacientes</h1>
@@ -36,11 +31,12 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
           stroke-linecap="round" stroke-linejoin="round"
           class="lucide lucide-search-icon lucide-search absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-500">
-          <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.34-4.34"/>
+          <circle cx="11" cy="11" r="8"/>
         </svg>
       </div>
       {{-- New Patient Button --}}
-      <button wire:click="openModal"
+      <button wire:click="displayForm"
         class="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition
           duration-200 ease-in-out transform flex items-center justify-center space-x-2 show-form">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -109,4 +105,9 @@
       </div> {{-- end Card --}}
     @endforeach
   </div>
+
+  @if($showForm)
+    <livewire:patient-form />
+  @endif
+
 </div>
