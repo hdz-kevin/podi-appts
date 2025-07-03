@@ -10,22 +10,23 @@ use Livewire\Component;
 class PatientList extends Component
 {
     public Collection $patients;
-    public bool $modal;
+    public bool $showForm;
 
     public function mount()
     {
         $this->patients = Auth::user()->patients;
-        $this->modal = false;
+        $this->showForm = false;
     }
 
-    public function openModal(): void
+    public function displayForm()
     {
-        $this->modal = true;
+        $this->showForm = true;
     }
 
-    public function closeModal(): void
+    #[On('hideForm')]
+    public function hideForm()
     {
-        $this->modal = false;
+        $this->showForm = false;
     }
 
     public function render()
