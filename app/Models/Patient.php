@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Model;
 
 class Patient extends Model
 {
@@ -34,8 +34,11 @@ class Patient extends Model
      */
     public function initials(): string
     {
-        $split = explode(" ", $this->name);
-        $initials = substr($split[0], 0, 1) . substr($split[1], 0, 1);
+        $initials = collect(explode(" ", $this->name))
+            ->filter()
+            ->take(2)
+            ->map(fn (string $word) => $word[0])
+            ->join('');
 
         return $initials;
     }
