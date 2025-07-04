@@ -1,6 +1,7 @@
 <div>
   @php
-    $initialColors = [ 'bg-blue-100 text-blue-600',
+    $initialColors = [
+      'bg-blue-100 text-blue-600',
       'bg-pink-100 text-pink-600',
       'bg-green-100 text-green-600',
       'bg-purple-100 text-purple-600',
@@ -13,7 +14,6 @@
       'bg-emerald-100 text-emerald-600',
       'bg-cyan-100 text-cyan-600',
       'bg-amber-100 text-amber-600',
-      'bg-gray-100 text-gray-600',
     ];
   @endphp
 
@@ -57,7 +57,7 @@
         duration-200 ease-in-out">
         {{-- Patient Avatar and Info --}}
         <div class="flex items-center space-x-3 mb-2">
-          <div class="{{ $initialColors[$index] }} flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">
+          <div class="{{ $initialColors[$index % count($initialColors)] }} flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold uppercase">
             {{ $patient->initials() }}
           </div>
           <div>
