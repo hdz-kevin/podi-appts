@@ -21,7 +21,12 @@ class PatientForm extends Component
 
     public function save()
     {
-        return "Saving...";
+        $data = $this->validate();
+        if ($data['address'] === '') $data['address'] = null;
+
+        Auth::user()->patients()->create($data);
+
+        $this->hideForm();
     }
 
     public function hideForm()
