@@ -65,7 +65,11 @@
               {{ $patient->name }}
             </h3>
             <p class="text-sm text-gray-700 flex items-center">
-              <i data-lucide="phone" class="lucide lucide-icon w-4 h-4 mr-1 text-gray-500"></i>
+              {{-- <i data-lucide="phone" class="lucide lucide-icon w-4 h-4 mr-1 text-gray-500"></i> --}}
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+                stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone mr-1.5 text-gray-500">
+                <path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/>
+              </svg>
               {{ $patient->phone_number }}
             </p>
           </div>
@@ -73,7 +77,7 @@
         {{-- Address --}}
         <div class="w-full text-sm text-gray-700 space-y-1">
           <p class="flex items-start">
-            <i data-lucide="map-pin" class="lucide w-4 h-4 mr-1 text-gray-500"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin-icon lucide-map-pin mr-1 text-gray-500"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
             {{ $patient->address ?? "Sin dirección" }}
           </p>
         </div>
