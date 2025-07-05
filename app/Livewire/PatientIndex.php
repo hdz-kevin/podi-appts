@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class PatientList extends Component
+class PatientIndex extends Component
 {
     public Collection $patients;
     public bool $showForm;
@@ -56,6 +56,6 @@ class PatientList extends Component
 
     public function render()
     {
-        return view('livewire.patient-list');
+        return view('livewire.patient-index');
     }
 }
