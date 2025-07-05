@@ -8,6 +8,10 @@ use Livewire\Component;
 
 class PatientForm extends Component
 {
+    // Properties
+    public ?int $editingPatientId = null;
+
+    // Model properties
     #[Validate('required', message: 'El nombre es obligatorio')]
     public string $name = '';
 
@@ -19,12 +23,30 @@ class PatientForm extends Component
     #[Validate('nullable')]
     public ?string $address = null;
 
+    public function mount(?int $editingPatientId = null)
+    {
+        if ($editingPatientId !== null) {
+            $this->editingPatientId = $editingPatientId;
+
+            $patient = Auth::user()->patients()->findOrFail($editingPatientId);
+            $this->name = $patient->name;
+            $this->phone_number = $patient->phone_number;
+            $this->address = $patient->address;
+        }
+    }
+
     public function save()
     {
+        if ($this->address === '') $this->address = null;
         $data = $this->validate();
-        if ($data['address'] === '') $data['address'] = null;
 
-        Auth::user()->patients()->create($data);
+        if ($this->editingPatientId !== null) {
+            $patient = Auth::user()->patients()->findOrFail($this->editingPatientId);
+            $patient->update($data);
+            $this->editingPatientId = null;
+        } else {
+            Auth::user()->patients()->create($data);
+        }
 
         $this->hideForm();
         $this->dispatch('refreshPatients');
