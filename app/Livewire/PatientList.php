@@ -29,6 +29,17 @@ class PatientList extends Component
         $this->showForm = false;
     }
 
+    /**
+     * Refresh the list of patients.
+     *
+     * @return void
+     */
+    #[On('refreshPatients')]
+    public function refreshPatients()
+    {
+        $this->patients = Auth::user()->patients;
+    }
+
     public function render()
     {
         return view('livewire.patient-list');

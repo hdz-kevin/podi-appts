@@ -27,6 +27,7 @@ class PatientForm extends Component
         Auth::user()->patients()->create($data);
 
         $this->hideForm();
+        $this->dispatch('refreshPatients');
     }
 
     public function hideForm()
