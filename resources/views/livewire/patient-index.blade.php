@@ -84,6 +84,7 @@
         {{-- Actions --}}
         <div class="flex justify-end w-full mt-4 space-x-2">
           <button
+            wire:click="displayForm({{ $patient->id }})"
             class="inline-flex items-center p-2 rounded-full text-blue-600 hover:bg-blue-100 transition duration-150 ease-in-out"
             title="Editar"
           >
@@ -94,6 +95,7 @@
             </svg>
           </button>
           <button
+            wire:click="delete({{ $patient->id }})"
             class="inline-flex items-center p-2 rounded-full text-red-600 hover:bg-red-100 transition duration-150 ease-in-out"
             title="Eliminar"
           >
@@ -111,7 +113,7 @@
   </div>
 
   @if($showForm)
-    <livewire:patient-form />
+    <livewire:patient-form :editingPatientId="$editingPatientId" />
   @endif
 
 </div>
