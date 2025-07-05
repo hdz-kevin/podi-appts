@@ -40,6 +40,20 @@ class PatientList extends Component
         $this->patients = Auth::user()->patients;
     }
 
+    /**
+     * Delete a patient by ID.
+     *
+     * @param integer $patientId
+     * @return void
+     */
+    public function delete(int $patientId)
+    {
+        $patient = Auth::user()->patients()->findOrFail($patientId);
+        $patient->delete();
+
+        $this->dispatch('refreshPatients');
+    }
+
     public function render()
     {
         return view('livewire.patient-list');

@@ -94,6 +94,7 @@
             </svg>
           </button>
           <button
+            wire:click="delete({{ $patient->id }})"
             class="inline-flex items-center p-2 rounded-full text-red-600 hover:bg-red-100 transition duration-150 ease-in-out"
             title="Eliminar"
           >
