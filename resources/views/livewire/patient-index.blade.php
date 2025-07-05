@@ -115,4 +115,5 @@
   @if($showForm)
     <livewire:patient-form :editingPatientId="$editingPatientId" />
   @endif
+
 </div>
