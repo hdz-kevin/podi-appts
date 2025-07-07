@@ -12,8 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
         then: function () {
             Route::get('/patients', fn () => view('patients.index'))
-                    ->middleware('web')
+                    ->middleware(['web', 'auth'])
                     ->name('patients.index');
+            
+            Route::get('/doctors', fn () => view('doctors.index'))
+                    ->middleware(['web', 'auth'])
+                    ->name('doctors.index');
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
