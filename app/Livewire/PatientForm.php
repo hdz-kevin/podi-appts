@@ -23,6 +23,13 @@ class PatientForm extends Component
     #[Validate('nullable')]
     public ?string $address = null;
 
+    /**
+     * Mount the component with optional patient ID for editing.
+     * If an ID is provided, it will load the patient's data for editing.
+     *
+     * @param integer|null $editingPatientId
+     * @return void
+     */
     public function mount(?int $editingPatientId = null)
     {
         if ($editingPatientId !== null) {
@@ -35,6 +42,13 @@ class PatientForm extends Component
         }
     }
 
+    /**
+     * Save the patient data.
+     * If $editingPatientId property is set, it updates the existing patient.
+     * Otherwise, it creates a new patient.
+     *
+     * @return void
+     */
     public function save()
     {
         if ($this->address === '') $this->address = null;
