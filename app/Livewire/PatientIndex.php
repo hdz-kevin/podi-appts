@@ -12,11 +12,27 @@ class PatientIndex extends Component
     public Collection $patients;
     public bool $showForm;
     public ?int $editingPatientId = null;
+    public string $search;
 
     public function mount()
     {
         $this->patients = Auth::user()->patients;
         $this->showForm = false;
+        $this->search = '';
+    }
+
+    /**
+     * Update the list of patients based on the search query.
+     *
+     * @return void
+     */
+    public function updatedSearch()
+    {
+        $this->patients = Auth::user()
+            ->patients()
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orWhere('phone_number', 'like', '%' . $this->search . '%')
+            ->get();
     }
 
     /**

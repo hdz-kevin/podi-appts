@@ -23,9 +23,10 @@
       {{-- Search Input --}}
       <div class="relative w-full md:w-80">
         <input
-        type="text"
-        placeholder="Buscar paciente..."
-        class="w-full px-4 py-2 pl-9 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 placeholder:text-gray-600
+          wire:model.live="search"
+          type="text"
+          placeholder="Buscar paciente..."
+          class="w-full px-4 py-2 pl-9 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 placeholder:text-gray-600
           focus:border-blue-500 sm:text-base transition duration-150 ease-in-out"
         >
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
@@ -49,6 +50,16 @@
       </button>
     </div>
   </div>
+
+  @if ($search && $patients->isEmpty())
+    <div class="text-center text-gray-600 mt-10 mb-5 text-xl font-medium">
+      <p>No se encontraron resultados para: <strong>{{ $search }}</strong></p>
+    </div>
+  @elseif ($patients->isEmpty())
+    <div class="text-center text-gray-600 mt-10 mb-5 text-xl font-medium">
+      <p>No hay pacientes registrados.</p>
+    </div>
+  @endif
 
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
     @foreach ($patients as $index => $patient)
