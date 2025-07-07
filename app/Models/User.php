@@ -56,4 +56,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Patient::class);
     }
+
+    /**
+     * Get the user's doctors.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function doctors(): HasMany
+    {
+        return $this->hasMany(Doctor::class);
+    }
 }
