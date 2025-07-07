@@ -12,41 +12,27 @@ class PatientIndex extends Component
     public Collection $patients;
     public bool $showForm;
     public ?int $editingPatientId = null;
+    public string $search;
 
     public function mount()
     {
         $this->patients = Auth::user()->patients;
         $this->showForm = false;
+        $this->search = '';
     }
 
     /**
-     * Refresh the list of patients.
+     * Update the list of patients based on the search query.
      *
      * @return void
      */
-    #[On('refreshPatients')]
-    public function refreshPatients()
+    public function updatedSearch()
     {
-        $this->patients = Auth::user()->patients;
-    }
-
-    public function displayForm(?int $patientEditingId = null)
-    {
-        if ($patientEditingId !== null) {
-            $this->editingPatientId = $patientEditingId;
-        }
-
-        $this->showForm = true;
-    }
-
-    #[On('hideForm')]
-    public function hideForm()
-    {
-        if ($this->editingPatientId !== null) {
-            $this->editingPatientId = null;
-        }
-
-        $this->showForm = false;
+        $this->patients = Auth::user()
+            ->patients()
+            ->where('name', 'like', '%' . $this->search . '%')
+            ->orWhere('phone_number', 'like', '%' . $this->search . '%')
+            ->get();
     }
 
     /**
@@ -61,6 +47,47 @@ class PatientIndex extends Component
         $patient->delete();
 
         $this->dispatch('refreshPatients');
+    }
+
+    /**
+     * Refresh the list of patients.
+     *
+     * @return void
+     */
+    #[On('refreshPatients')]
+    public function refreshPatients()
+    {
+        $this->patients = Auth::user()->patients;
+    }
+
+    /**
+     * Display the patient form for editing or creating a new patient.
+     *
+     * @param integer|null $patientEditingId
+     * @return void
+     */
+    public function displayForm(?int $patientEditingId = null)
+    {
+        if ($patientEditingId !== null) {
+            $this->editingPatientId = $patientEditingId;
+        }
+
+        $this->showForm = true;
+    }
+
+    /**
+     * Hide the patient form.
+     *
+     * @return void
+     */
+    #[On('hideForm')]
+    public function hideForm()
+    {
+        if ($this->editingPatientId !== null) {
+            $this->editingPatientId = null;
+        }
+
+        $this->showForm = false;
     }
 
     public function render()
