@@ -2,8 +2,8 @@
   @php
     $initialColors = [
       'bg-blue-100 text-blue-600',
-      'bg-pink-100 text-pink-600',
       'bg-green-100 text-green-600',
+      'bg-pink-100 text-pink-600',
       'bg-purple-100 text-purple-600',
       'bg-yellow-100 text-yellow-600',
       'bg-red-100 text-red-600',
@@ -81,6 +81,8 @@
             </svg>
           </button>
           <button
+            wire:click="delete({{ $doctor->id }})"
+            wire:confirm="¿Estás seguro de que quieres eliminar este doctor?"
             class="inline-flex items-center p-2 rounded-full text-red-600 hover:bg-red-100 transition duration-150 ease-in-out"
             title="Eliminar"
           >
