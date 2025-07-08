@@ -17,7 +17,7 @@
           <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">Dashboard</x-nav-link>
           <x-nav-link href="#" :active="request()->routeIs('appointments.create')">Nueva Cita</x-nav-link>
           <x-nav-link :href="route('patients.index')" :active="request()->routeIs('patients.index')">Pacientes</x-nav-link>
-          <x-nav-link href="#" :active="request()->routeIs('doctors.index')">Doctores</x-nav-link>
+          <x-nav-link :href="route('doctors.index')" :active="request()->routeIs('doctors.index')">Doctores</x-nav-link>
         </div>
 
         <x-nav-link href="#" :active="request()->routeIs('#')">
