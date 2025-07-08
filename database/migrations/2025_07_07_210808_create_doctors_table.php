@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('doctors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('last_name');
             $table->tinyInteger('gender'); // \App\Enums\Gender
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();

@@ -9,9 +9,20 @@ class Doctor extends Model
 {
     protected $fillable = [
         'name',
+        'last_name',
         'gender',
         'user_id',
     ];
+
+    /**
+     * Get the doctor's full name.
+     *
+     * @return string
+     */
+    public function fullName(): string
+    {
+        return "{$this->name} {$this->last_name}";
+    }
 
     /**
      * Get the user that owns the doctor.
@@ -21,5 +32,21 @@ class Doctor extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the initials of the doctor's name.
+     *
+     * @return string
+     */
+    public function initials(): string
+    {
+        $initials = collect(explode(" ", $this->fullName()))
+            ->filter()
+            ->take(2)
+            ->map(fn (string $word) => $word[0])
+            ->join('');
+
+        return $initials;
     }
 }
