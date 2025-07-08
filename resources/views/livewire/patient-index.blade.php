@@ -52,11 +52,11 @@
   </div>
 
   @if ($search && $patients->isEmpty())
-    <div class="text-center text-gray-600 mt-10 mb-5 text-xl font-medium">
+    <div class="text-center text-gray-600 mt-12 mb-2 text-xl font-medium">
       <p>No se encontraron resultados para: <strong>{{ $search }}</strong></p>
     </div>
   @elseif ($patients->isEmpty())
-    <div class="text-center text-gray-600 mt-10 mb-5 text-xl font-medium">
+    <div class="text-center text-gray-600 mt-12 mb-2 text-xl font-medium">
       <p>No hay pacientes registrados.</p>
     </div>
   @endif
