@@ -11,14 +11,14 @@
       Nuevo Doctor
     </h2>
 
-    <form class="space-y-5">
+    <form class="space-y-5" wire:submit.prevent="save">
       {{-- Name --}}
       <div>
         <label for="name" class="block font-medium text-gray-700 mb-1.5">
           Nombre <span class="text-red-500">*</span>
         </label>
         <input
-          name="name"
+          wire:model.live="name"
           id="name"
           type="text"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-400 focus:border-blue-400"
@@ -37,7 +37,7 @@
           Apellido(s) <span class="text-red-500">*</span>
         </label>
         <input
-          name="last_name"
+          wire:model.live="last_name"
           id="last_name"
           type="text"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-400 focus:border-blue-400"
@@ -55,7 +55,7 @@
           Sexo <span class="text-red-500">*</span>
         </label>
         <select
-          name="gender"
+          wire:model.live="gender"
           id="gender"
           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-400 focus:border-blue-400 bg-white"
         >
