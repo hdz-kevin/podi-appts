@@ -36,7 +36,7 @@ class PatientIndex extends Component
     }
 
     /**
-     * Delete a patient by ID.
+     * Delete a patient by id.
      *
      * @param integer $patientId
      * @return void
