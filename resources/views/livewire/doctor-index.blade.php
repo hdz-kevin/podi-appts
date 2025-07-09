@@ -15,10 +15,12 @@
   @endphp
 
   <div class="flex flex-col md:flex-row items-center justify-between mb-6">
-    <h1 class="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Doctores</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-4 md:mb-0">Gestión de Doctores</h1>
     <div class="flex items-center">
       {{-- New Doctor Button --}}
-      <button class="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition
+      <button
+        wire:click="displayForm"
+        class="w-full md:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-5 rounded-lg shadow-md transition
           duration-200 ease-in-out transform flex items-center justify-center space-x-2 show-form">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
           stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
@@ -99,4 +101,9 @@
       </div> {{-- end Card --}}
     @endforeach
   </div>
+
+  @if ($showForm)
+    <livewire:doctor-form />
+  @endif
+
 </div>
