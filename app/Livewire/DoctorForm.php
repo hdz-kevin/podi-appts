@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
@@ -16,14 +17,16 @@ class DoctorForm extends Component
     #[Validate('in:1,2', message: 'Opción no válida')] // 1,2: \App\Enums\Gender values
     public string $gender;
 
-    public function render()
-    {
-        return view('livewire.doctor-form');
-    }
-
+    /**
+     * Save a doctor in the DB.
+     *
+     * @return void
+     */
     public function save()
     {
         $data = $this->validate();
+
+        Auth::user()->doctors()->create($data);
 
         return "Saving...";
     }
@@ -31,5 +34,10 @@ class DoctorForm extends Component
     public function hideForm()
     {
         $this->dispatch('hideForm');
+    }
+
+    public function render()
+    {
+        return view('livewire.doctor-form');
     }
 }
