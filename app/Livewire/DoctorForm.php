@@ -28,12 +28,13 @@ class DoctorForm extends Component
 
         Auth::user()->doctors()->create($data);
 
-        return "Saving...";
+        $this->hideForm();
+        $this->dispatch('refresh-doctors');
     }
 
     public function hideForm()
     {
-        $this->dispatch('hideForm');
+        $this->dispatch('hide-form');
     }
 
     public function render()

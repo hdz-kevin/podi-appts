@@ -16,6 +16,7 @@ class DoctorIndex extends Component
     public function mount()
     {
         $this->doctors = Doctor::all();
+        $this->showForm = false;
     }
 
     /**
@@ -33,6 +34,17 @@ class DoctorIndex extends Component
     }
 
     /**
+     * Refresh the list of doctors.
+     *
+     * @return void
+     */
+    #[On('refresh-doctors')]
+    public function refreshDoctors()
+    {
+        $this->doctors = Auth::user()->doctors;
+    }
+
+    /**
      * Display doctor form for editing or creating a new doctor.
      *
      * @return void
@@ -47,7 +59,7 @@ class DoctorIndex extends Component
      *
      * @return void
      */
-    #[On('hideForm')]
+    #[On('hide-form')]
     public function hideForm()
     {
         $this->showForm = false;
