@@ -46,7 +46,7 @@ class PatientIndex extends Component
         $patient = Auth::user()->patients()->findOrFail($patientId);
         $patient->delete();
 
-        $this->dispatch('refreshPatients');
+        $this->refreshPatients();
     }
 
     /**
@@ -76,7 +76,7 @@ class PatientIndex extends Component
     }
 
     /**
-     * Hide the patient form.
+     * Hide patient form.
      *
      * @return void
      */

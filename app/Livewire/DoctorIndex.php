@@ -31,7 +31,7 @@ class DoctorIndex extends Component
         $doctor = Auth::user()->doctors()->findOrFail($doctorId);
         $doctor->delete();
 
-        $this->doctors = Doctor::all();
+        $this->refreshDoctors();
     }
 
     /**
@@ -48,6 +48,7 @@ class DoctorIndex extends Component
     /**
      * Display doctor form for editing or creating a new doctor.
      *
+     * @param integer|null $editingDoctorId
      * @return void
      */
     public function displayForm(?int $editingDoctorId = null)

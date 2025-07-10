@@ -9,7 +9,7 @@ use Livewire\Component;
 class DoctorForm extends Component
 {   
     // Properties
-    public ?int $editingDoctorId;
+    public ?int $editingDoctorId = null;
 
     // Model properties
     #[Validate('required', message: 'El nombre es obligatorio')]
@@ -39,7 +39,9 @@ class DoctorForm extends Component
     }
 
     /**
-     * Save a doctor in the DB.
+     * Save doctor data.
+     * If `$editingDoctorId` property is set, it updates the existing doctor.
+     * Otherwise, it creates a new doctor.
      *
      * @return void
      */
@@ -47,7 +49,12 @@ class DoctorForm extends Component
     {
         $data = $this->validate();
 
-        Auth::user()->doctors()->create($data);
+        if ($this->editingDoctorId !== null) {
+            Auth::user()->doctors()->findOrFail($this->editingDoctorId)->update($data);
+            $this->editingDoctorId = null;
+        } else {
+            Auth::user()->doctors()->create($data);
+        }
 
         $this->hideForm();
         $this->dispatch('refresh-doctors');
