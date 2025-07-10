@@ -54,7 +54,7 @@ class PatientIndex extends Component
      *
      * @return void
      */
-    #[On('refreshPatients')]
+    #[On('refresh-patients')]
     public function refreshPatients()
     {
         $this->patients = Auth::user()->patients;
@@ -80,7 +80,7 @@ class PatientIndex extends Component
      *
      * @return void
      */
-    #[On('hideForm')]
+    #[On('hide-form')]
     public function hideForm()
     {
         if ($this->editingPatientId !== null) {

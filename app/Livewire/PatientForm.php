@@ -62,12 +62,12 @@ class PatientForm extends Component
         }
 
         $this->hideForm();
-        $this->dispatch('refreshPatients');
+        $this->dispatch('refresh-patients');
     }
 
     public function hideForm()
     {
-        $this->dispatch('hideForm');
+        $this->dispatch('hide-form');
     }
 
     public function render()
