@@ -73,6 +73,7 @@
         {{-- Actions --}}
         <div class="flex justify-end w-full mt-4 space-x-2">
           <button
+            wire:click="displayForm({{ $doctor->id }})"
             class="inline-flex items-center p-2 rounded-full text-blue-600 hover:bg-blue-100 transition duration-150 ease-in-out"
             title="Editar"
           >
@@ -103,7 +104,7 @@
   </div>
 
   @if ($showForm)
-    <livewire:doctor-form />
+    <livewire:doctor-form :$editingDoctorId />
   @endif
 
 </div>

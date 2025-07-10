@@ -24,13 +24,12 @@ class PatientForm extends Component
     public ?string $address = null;
 
     /**
-     * Mount the component with optional patient ID for editing.
      * If an ID is provided, it will load the patient's data for editing.
      *
      * @param integer|null $editingPatientId
      * @return void
      */
-    public function mount(?int $editingPatientId = null)
+    public function mount(?int $editingPatientId)
     {
         if ($editingPatientId !== null) {
             $this->editingPatientId = $editingPatientId;

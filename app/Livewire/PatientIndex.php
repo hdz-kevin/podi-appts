@@ -63,13 +63,13 @@ class PatientIndex extends Component
     /**
      * Display the patient form for editing or creating a new patient.
      *
-     * @param integer|null $patientEditingId
+     * @param integer|null $editingPatientId
      * @return void
      */
-    public function displayForm(?int $patientEditingId = null)
+    public function displayForm(?int $editingPatientId = null)
     {
-        if ($patientEditingId !== null) {
-            $this->editingPatientId = $patientEditingId;
+        if ($editingPatientId !== null) {
+            $this->editingPatientId = $editingPatientId;
         }
 
         $this->showForm = true;

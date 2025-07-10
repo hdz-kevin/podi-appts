@@ -12,6 +12,7 @@ class DoctorIndex extends Component
 {
     public Collection $doctors;
     public bool $showForm;
+    public ?int $editingDoctorId = null;
 
     public function mount()
     {
@@ -49,8 +50,12 @@ class DoctorIndex extends Component
      *
      * @return void
      */
-    public function displayForm()
+    public function displayForm(?int $editingDoctorId = null)
     {
+        if ($editingDoctorId !== null) {
+            $this->editingDoctorId = $editingDoctorId;
+        }
+
         $this->showForm = true;
     }
 
@@ -62,6 +67,10 @@ class DoctorIndex extends Component
     #[On('hide-form')]
     public function hideForm()
     {
+        if ($this->editingDoctorId !== null) {
+            $this->editingDoctorId = null;
+        }
+
         $this->showForm = false;
     }
 
