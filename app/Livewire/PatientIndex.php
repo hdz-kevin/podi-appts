@@ -22,20 +22,6 @@ class PatientIndex extends Component
     }
 
     /**
-     * Update the list of patients based on the search query.
-     *
-     * @return void
-     */
-    public function updatedSearch()
-    {
-        $this->patients = Auth::user()
-            ->patients()
-            ->where('name', 'like', '%' . $this->search . '%')
-            ->orWhere('phone_number', 'like', '%' . $this->search . '%')
-            ->get();
-    }
-
-    /**
      * Delete a patient by id.
      *
      * @param integer $patientId
@@ -79,7 +65,14 @@ class PatientIndex extends Component
 
     public function render()
     {
-        $patients = Auth::user()->patients()->paginate(8);
+        $query = Auth::user()->patients();
+
+        if ($this->search) {
+            $query->where('name', 'like', '%'.$this->search.'%')
+                    ->orWhere('phone_number', 'like', '%'.$this->search.'%');
+        }
+
+        $patients = $query->paginate(8);
 
         return view('livewire.patient-index', [
             'patients' => $patients,
