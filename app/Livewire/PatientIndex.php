@@ -17,7 +17,6 @@ class PatientIndex extends Component
 
     public function mount()
     {
-        // $this->patients = Auth::user()->patients;
         $this->showForm = false;
         $this->search = '';
     }
@@ -46,17 +45,6 @@ class PatientIndex extends Component
     {
         $patient = Auth::user()->patients()->findOrFail($patientId);
         $patient->delete();
-    }
-
-    /**
-     * Refresh the list of patients.
-     *
-     * @return void
-     */
-    #[On('refresh-patients')]
-    public function refreshPatients()
-    {
-        $this->patients = Auth::user()->patients;
     }
 
     /**
