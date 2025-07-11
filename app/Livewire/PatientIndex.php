@@ -2,21 +2,22 @@
 
 namespace App\Livewire;
 
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PatientIndex extends Component
 {
-    public Collection $patients;
+    use WithPagination;
+
     public bool $showForm;
     public ?int $editingPatientId = null;
     public string $search;
 
     public function mount()
     {
-        $this->patients = Auth::user()->patients;
+        // $this->patients = Auth::user()->patients;
         $this->showForm = false;
         $this->search = '';
     }
@@ -45,8 +46,6 @@ class PatientIndex extends Component
     {
         $patient = Auth::user()->patients()->findOrFail($patientId);
         $patient->delete();
-
-        $this->refreshPatients();
     }
 
     /**
@@ -92,6 +91,10 @@ class PatientIndex extends Component
 
     public function render()
     {
-        return view('livewire.patient-index');
+        $patients = Auth::user()->patients()->paginate(8);
+
+        return view('livewire.patient-index', [
+            'patients' => $patients,
+        ]);
     }
 }

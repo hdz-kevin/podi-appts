@@ -124,6 +124,8 @@
     @endforeach
   </div>
 
+  {{ $patients->links() }}
+
   @if ($showForm)
     <livewire:patient-form :editingPatientId="$editingPatientId" />
   @endif
