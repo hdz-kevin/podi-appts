@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Doctor extends Model
 {
@@ -14,6 +15,10 @@ class Doctor extends Model
         'user_id',
     ];
 
+    protected $casts = [
+        'gender' => \App\Enums\Gender::class,
+    ];
+
     /**
      * Get the doctor's full name.
      *
@@ -22,16 +27,6 @@ class Doctor extends Model
     public function fullName(): string
     {
         return "{$this->name} {$this->last_name}";
-    }
-
-    /**
-     * Get the user that owns the doctor.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
     }
 
     /**
@@ -50,7 +45,23 @@ class Doctor extends Model
         return $initials;
     }
 
-    protected $casts = [
-        'gender' => \App\Enums\Gender::class,
-    ];
+    /**
+     * Get the user that owns the doctor.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the doctor's appointments.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function appointments(): HasMany
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }
