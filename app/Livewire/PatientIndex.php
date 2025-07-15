@@ -22,6 +22,17 @@ class PatientIndex extends Component
     }
 
     /**
+     * Reset pagination when the search input changes.
+     * This ensures that the search results start from the first page.
+     *
+     * @return void
+     */
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    /**
      * Delete a patient by id.
      *
      * @param integer $patientId
@@ -67,9 +78,12 @@ class PatientIndex extends Component
     {
         $query = Auth::user()->patients();
 
+        // Todo: Searcher only working on first page
         if ($this->search) {
-            $query->where('name', 'like', '%'.$this->search.'%')
-                    ->orWhere('phone_number', 'like', '%'.$this->search.'%');
+            $query->where(function ($q) {
+                $q->where('name', 'like', '%'.$this->search.'%')
+                        ->orWhere('phone_number', 'like', '%'.$this->search.'%');
+            });
         }
 
         $patients = $query->paginate(8);
