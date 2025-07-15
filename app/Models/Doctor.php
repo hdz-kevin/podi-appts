@@ -49,4 +49,8 @@ class Doctor extends Model
 
         return $initials;
     }
+
+    protected $casts = [
+        'gender' => \App\Enums\Gender::class,
+    ];
 }

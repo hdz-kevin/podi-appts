@@ -52,7 +52,7 @@
           </div>
           <div class="flex-1">
             <h3 class="text-xl font-semibold text-gray-900">
-              Dr. {{ $doctor->name }}
+              {{ $doctor->gender == \App\Enums\Gender::Male ? "Dr." : "Dra." }} {{ $doctor->name }}
             </h3>
           </div>
         </div>
@@ -66,7 +66,7 @@
 
           <p class="font-medium">
             Sexo:
-            <span class="text-gray-600 font-normal">{{ \App\Enums\Gender::tryFrom($doctor->gender)->label() }}</span>
+            <span class="text-gray-600 font-normal">{{ $doctor->gender->label() }}</span>
           </p>
         </div>
 
