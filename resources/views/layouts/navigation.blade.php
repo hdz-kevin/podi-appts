@@ -15,7 +15,6 @@
       <div class="hidden sm:flex sm:items-center sm:ms-6 gap-2">
         <div class="flex gap-3 bg-gray-100 rounded-3xl">
           <x-nav-link :href="route('appointments.index')" :active="request()->routeIs('appointments.index')">Calendario</x-nav-link>
-          <x-nav-link href="#" :active="request()->routeIs('appointments.create')">Nueva Cita</x-nav-link>
           <x-nav-link :href="route('patients.index')" :active="request()->routeIs('patients.index')">Pacientes</x-nav-link>
           <x-nav-link :href="route('doctors.index')" :active="request()->routeIs('doctors.index')">Doctores</x-nav-link>
         </div>
