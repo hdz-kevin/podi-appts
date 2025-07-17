@@ -16,6 +16,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/patients', fn () => view('patients.index'))->name('patients.index');
     Route::get('/doctors', fn () => view('doctors.index'))->name('doctors.index');
+    Route::get('/appointments', fn () => view('appointments.index'))->name('appointments.index');
 });
 
 require __DIR__.'/auth.php';
