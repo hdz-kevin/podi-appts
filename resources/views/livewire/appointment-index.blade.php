@@ -116,24 +116,29 @@
 
   <!-- Appointment List by Time -->
   <div class="space-y-4">
+    @foreach ($appointments as $appointment)
     <!-- Cita 1: En Curso (A Domicilio - Ejemplo) -->
     <div
       class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:shadow-md transition duration-200 ease-in-out">
       <div
         class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto mb-3 md:mb-0">
         <div class="flex-shrink-0 text-xl font-bold text-blue-700 w-36 whitespace-nowrap">
-          11:00 - 11:30
+          {{ \Carbon\Carbon::parse($appointment->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($appointment->end_time)->format('H:i') }}
         </div>
         <div class="flex-1 space-y-1">
-          <p class="text-lg font-semibold text-gray-900">Ana Soto Lopez</p>
+          <p class="text-lg font-semibold text-gray-900">
+            {{ $appointment->patient->name }}
+          </p>
           <p class="text-[15px] text-gray-600 flex items-center ml-1">
             <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone text-gray-500 mr-1"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
-            +52 231000111
+            {{ $appointment->patient->phone_number }}
           </p>
-          <p class="text-sm text-gray-500 flex items-center ml-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house text-blue-600 mr-1"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-            Calle Ficticia 123, Colonia Ejemplo, Ciudad Ficticia
-          </p>
+          @if ($appointment->address)
+            <p class="text-sm text-gray-500 flex items-center ml-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house text-blue-600 mr-1"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              {{ $appointment->address }}
+            </p>
+          @endif
         </div>
       </div>
       <div
@@ -163,6 +168,7 @@
         </div>
       </div>
     </div>
+    @endforeach
 
     <!-- Cita Pendiente -->
     {{-- <div
