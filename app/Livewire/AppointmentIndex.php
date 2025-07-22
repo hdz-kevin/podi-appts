@@ -10,7 +10,11 @@ class AppointmentIndex extends Component
     public function render()
     {
         return view('livewire.appointment-index', [
-            'appointments' => Doctor::first()->appointments,
+            'appointments' => Doctor::first()
+                                ->appointments()
+                                ->where('date', today())
+                                ->orderBy('start_time')
+                                ->get(),
         ]);
     }
 }

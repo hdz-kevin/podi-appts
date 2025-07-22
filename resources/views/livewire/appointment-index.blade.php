@@ -37,7 +37,7 @@
     </button>
   </div>
 
-  <div class="mb-6 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4">
+  <div class="mb-7 flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0 sm:space-x-4">
     <div class="flex items-center space-x-4"> <!-- Contenedor para Año y Mes -->
       <select
         class="text-xl font-semibold text-gray-800 border border-gray-300 rounded-md pl-4 bg-gray-50 shadow transition-all">
@@ -119,33 +119,41 @@
     @foreach ($appointments as $appointment)
     <!-- Cita 1: En Curso (A Domicilio - Ejemplo) -->
     <div
-      class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:shadow-md transition duration-200 ease-in-out">
+      class="bg-white rounded-lg shadow-sm border border-gray-200 p-5 flex flex-col md:flex-row items-start md:items-center justify-between hover:shadow-md transition duration-200 ease-in-out">
       <div
         class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto mb-3 md:mb-0">
-        <div class="flex-shrink-0 text-xl font-bold text-blue-700 w-36 whitespace-nowrap">
+        <div class="flex-shrink-0 text-xl font-bold
+          @if ($appointment->status == \App\Enums\AppointmentStatus::InProgress) text-blue-700
+          @else text-gray-800
+          @endif w-36 whitespace-nowrap"
+        >
           {{ \Carbon\Carbon::parse($appointment->start_time)->format('H:i') }} - {{ \Carbon\Carbon::parse($appointment->end_time)->format('H:i') }}
         </div>
-        <div class="flex-1 space-y-1">
-          <p class="text-lg font-semibold text-gray-900">
+        <div class="flex-1 space-y-1.5">
+          <p class="text-xl font-semibold text-gray-900">
             {{ $appointment->patient->name }}
           </p>
-          <p class="text-[15px] text-gray-600 flex items-center ml-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone text-gray-500 mr-1"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+          <p class="text-gray-600 font-medium flex items-center ml-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone-icon lucide-phone text-blue-600 mr-1"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
             {{ $appointment->patient->phone_number }}
           </p>
-          @if ($appointment->address)
-            <p class="text-sm text-gray-500 flex items-center ml-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house text-blue-600 mr-1"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-              {{ $appointment->address }}
+            <p class="text-gray-600 font-medium flex items-center ml-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-house-icon lucide-house text-blue-600 mr-1"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              {{ $appointment->address ?? "En Clinica" }}
             </p>
-          @endif
         </div>
       </div>
       <div
         class="flex flex-col sm:flex-row items-start sm:items-center justify-end space-y-2 sm:space-y-0 sm:space-x-2 w-full md:w-auto">
         <span
-          class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
-          En Curso
+          class="inline-flex items-center px-4 py-1.5 rounded-full text-sm font-medium
+            @if ($appointment->status == \App\Enums\AppointmentStatus::InProgress) bg-yellow-100 text-yellow-800
+            @elseif ($appointment->status == \App\Enums\AppointmentStatus::Scheduled) bg-blue-100 text-blue-800
+            @elseif ($appointment->status == \App\Enums\AppointmentStatus::Completed) bg-green-100 text-green-800
+            @elseif ($appointment->status == \App\Enums\AppointmentStatus::Cancelled) bg-red-100 text-red-800
+            @endif"
+          >
+          {{ $appointment->status->label() }}
         </span>
         <div class="flex space-x-1">
           <button
@@ -169,46 +177,5 @@
       </div>
     </div>
     @endforeach
-
-    <!-- Cita Pendiente -->
-    {{-- <div
-      class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex flex-col md:flex-row items-start md:items-center justify-between hover:shadow-md transition duration-200 ease-in-out">
-      <div
-        class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4 w-full md:w-auto mb-3 md:mb-0">
-        <div class="flex-shrink-0 text-xl font-bold text-gray-700 w-36 whitespace-nowrap">
-          14:00 - 14:45
-        </div>
-        <div class="flex-1">
-          <p class="text-lg font-semibold text-gray-900">Gabriel Gonzalez Palacios</p>
-          <p class="text-sm text-gray-600 flex items-center">
-            <i data-lucide="phone" class="lucide lucide-icon w-4 h-4 mr-1 text-gray-500"></i>
-            +52 231000111
-          </p>
-        </div>
-      </div>
-      <div
-        class="flex flex-col sm:flex-row items-start sm:items-center justify-end space-y-2 sm:space-y-0 sm:space-x-2 w-full md:w-auto">
-        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-          Pendiente
-        </span>
-        <div class="flex space-x-1">
-          <button
-            class="inline-flex items-center p-2 rounded-full text-blue-600 hover:bg-blue-100 transition duration-150 ease-in-out"
-            title="Editar">
-            <i data-lucide="pencil" class="lucide lucide-icon w-4 h-4"></i>
-          </button>
-          <button
-            class="inline-flex items-center p-2 rounded-full text-red-600 hover:bg-red-100 transition duration-150 ease-in-out"
-            title="Cancelar">
-            <i data-lucide="x-circle" class="lucide lucide-icon w-4 h-4"></i>
-          </button>
-          <button
-            class="inline-flex items-center p-2 rounded-full text-gray-600 hover:bg-gray-100 transition duration-150 ease-in-out"
-            title="Detalles">
-            <i data-lucide="info" class="lucide lucide-icon w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
-    </div> --}}
   </div>
 </div>

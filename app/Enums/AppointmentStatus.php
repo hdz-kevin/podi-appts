@@ -10,6 +10,21 @@ enum AppointmentStatus: int
     case Cancelled = 4;
 
     /**
+     * Get the label for the appointment status.
+     *
+     * @return string
+     */
+    public function label(): string
+    {
+        return match ($this) {
+            self::Scheduled => 'Programada',
+            self::InProgress => 'En Curso',
+            self::Completed => 'Completada',
+            self::Cancelled => 'Cancelada',
+        };
+    }
+
+    /**
      * Get all appointment status values.
      *
      * @return \Illuminate\Support\Collection<int, int>
